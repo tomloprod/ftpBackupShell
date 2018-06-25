@@ -1,12 +1,5 @@
 #!/bin/sh
 
-clean_backup() {
-  for i in "${!FILE[@]}"; do
-     rm -f ./${FILE[$i]}
-     echo 'Local Backup Removed: '${FILE[$i]}
-  done
-}
-
 send_to_ftp(){
   ftp -n -i $SERVER $PORT <<EOF
   user $USERNAME $PASSWORD
@@ -62,8 +55,8 @@ do
       else
          echo 'Please select a valid type'
    fi
+   rm -f $CURRENT_FILE
 done
 
 echo 'Remote Backup Complete'
-clean_backup
 #END
